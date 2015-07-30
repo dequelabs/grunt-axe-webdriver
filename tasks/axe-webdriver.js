@@ -12,14 +12,14 @@
 
 'use strict';
 
-var WebDriver = require('selenium-webdriver'),
-	AxeBuilder = require('axe-webdriverjs'),
-	Promise = require('promise'),
-	path = require('path'),
-  reporter = require('../lib/reporter');
-
 module.exports = function(grunt) {
-	grunt.registerMultiTask('axe_webdriver', 'Grunt plugin for aXe utilizing WebDriverJS', function() {
+	var WebDriver = require('selenium-webdriver'),
+		AxeBuilder = require('axe-webdriverjs'),
+		Promise = require('promise'),
+		path = require('path'),
+		reporter = require('../lib/reporter');
+
+	grunt.registerMultiTask('axe-webdriver', 'Grunt plugin for aXe utilizing WebDriverJS', function() {
 		var options = this.options({
 			browser: 'firefox',
 			server: null,
@@ -34,21 +34,25 @@ module.exports = function(grunt) {
 		var dest = this.data.dest;
 		Promise.all(this.data.urls.map(function(url) {
 			return new Promise(function(resolve, reject) {
+
 				driver
 					.get(url)
 					.then(function() {
 						new AxeBuilder(driver)
-							.analyze(resolve);
+							.analyze(function (results) {
+								results.url = url;
+								resolve(results);
+							});
 					});
 			});
 		})).then(function(results) {
-      if (dest) {
-        grunt.file.write(dest, JSON.stringify(results, null, '  '));
-      }
-      var result = reporter(grunt, results, options.threshold);
-			driver.quit();
-			done(result);
+			if (dest) {
+				grunt.file.write(dest, JSON.stringify(results, null, '  '));
+			}
+			var result = reporter(grunt, results, options.threshold);
+			driver.quit().then(function () {
+				done(result);
+			});
 		});
 	});
-
 };

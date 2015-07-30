@@ -14,7 +14,7 @@
 
 module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
-  grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	grunt.initConfig({
 
@@ -26,27 +26,27 @@ module.exports = function(grunt) {
 					base: ['.']
 				}
 			}
-    },
+		},
 
-		axe_webdriver: {
+		"axe-webdriver" : {
 			firefox: {
 				options: {
 					threshold: 2
 				},
-        urls: ['http://localhost:' + (grunt.option('port') || 9876) + '/test/fixtures/document-language.html']
+				urls: ['http://localhost:' + (grunt.option('port') || 9876) + '/test/fixtures/document-language.html']
 			},
-      chrome: {
-        options: {
-          browser: 'chrome'
-        },
-        urls: ['http://localhost:' + (grunt.option('port') || 9876) + '/test/fixtures/document-language.html'],
+			chrome: {
+				options: {
+					browser: 'chrome'
+				},
+				urls: ['http://localhost:' + (grunt.option('port') || 9876) + '/test/fixtures/document-language.html'],
 				dest: 'tmp/gu.json'
-      }
+			}
 		}
 
 	});
 
-	grunt.registerTask('example', ['connect', 'axe_webdriver']);
+	grunt.registerTask('example', ['connect', 'axe-webdriver']);
 
 	// By default, lint and run all tests.
 	grunt.registerTask('default', ['example']);
