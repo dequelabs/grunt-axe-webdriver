@@ -17,67 +17,91 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('axe-grunt-webdriver');
 ```
 
-## The "axe_grunt_webdriver" task
+## The "axe-webdriver" task
 
 ### Overview
-In your project's Gruntfile, add a section named `axe_grunt_webdriver` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `axe-webdriver` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
-  axe_grunt_webdriver: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
+  "axe-webdriver": {
+    your_browser_target: {
       // Target-specific file lists and/or options go here.
+      options: {
+      }
+      urls: [],
+      dest: "output.json"
     },
   },
 });
 ```
 
-### Options
+### options
+Type: `Object`
+Default value:
+```
+{
+  browser: 'firefox',
+  threshold: 0
+}
+```
 
-#### options.separator
+#### threshold
+Type: `Number`
+Default value: `0`
+
+A number that represents the maximum number of allowable violations. Each violation represents a rule that fails, it may fail for an number of nodes. It is recommended that this value not be changed.
+
+#### browser
 Type: `String`
-Default value: `',  '`
+Default value: `firefox`
 
-A string value that is used to do something with whatever.
+Which browser to run the tests in
 
-#### options.punctuation
+### urls
+Type: `Array[String]`
+Default value: `[]`
+
+An Array of URLs that will be tested. The default value is an empty array, you must supply at least one URL in order to successfully complete this task.
+
+### dest
 Type: `String`
-Default value: `'.'`
+Default value: undefined
 
-A string value that is used to do something else with whatever else.
+An optional file to which the results of the accessibility scans will be written as a JSON Array of results objects.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used in combination with a list of two URLs that are to be tested for accessibility issues. The accessibility tests wil be run in Firefox only. The results will not be output but will be tested for zero violations. If violations occur, the Grunt task will fail and interrupt the Grunt script.
 
 ```js
 grunt.initConfig({
-  axe_grunt_webdriver: {
-    options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+  "axe-webdriver": {
+    firefox: {
+      options: {},
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html']
+    }
   },
 });
 ```
 
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
+#### Additional browser
+In this example, the custom target browser option is used to add tests for the Chrome browser. Note that the urls for each target must be supplied. This also means that the urls can be different for each browser.
 
 ```js
 grunt.initConfig({
-  axe_grunt_webdriver: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
+  "axe-webdriver": {
+    firefox: {
+      options: {},
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html']
     },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    chrome: {
+      options: {
+        browser: "chrome"
+      },
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html'],
+    }
   },
 });
 ```
