@@ -15,9 +15,9 @@
 module.exports = function(grunt) {
 	grunt.loadTasks('tasks');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-mocha-cli');
 
 	grunt.initConfig({
-
 		connect: {
 			test: {
 				options: {
@@ -27,7 +27,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
 		"axe-webdriver" : {
 			firefox: {
 				options: {
@@ -42,13 +41,21 @@ module.exports = function(grunt) {
 				urls: ['http://localhost:' + (grunt.option('port') || 9876) + '/test/fixtures/document-language.html'],
 				dest: 'tmp/gu.json'
 			}
+		},
+		mochacli: {
+			options: {
+				require: ['should'],
+				reporter: 'nyan',
+				bail: true
+			},
+			all: ['test/unit/*.js']
 		}
-
 	});
 
 	grunt.registerTask('example', ['connect', 'axe-webdriver']);
+	grunt.registerTask('test', ['mochacli']);
 
 	// By default, lint and run all tests.
-	grunt.registerTask('default', ['example']);
+	grunt.registerTask('default', ['test', 'example']);
 
 };
