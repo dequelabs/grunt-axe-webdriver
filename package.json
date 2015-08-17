@@ -45,7 +45,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "axe-webdriverjs": "~0.1.0",
+    "axe-webdriverjs": "~0.2.0",
     "promise": "^7.0.1",
     "selenium-webdriver": "^2.46.0"
   },
