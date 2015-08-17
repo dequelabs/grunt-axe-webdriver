@@ -1,20 +1,19 @@
 {
-  "name": "axe-grunt-webdriver",
+  "name": "grunt-axe-webdriver",
   "description": "Grunt plugin for aXe utilizing WebDriverJS",
   "version": "0.0.1",
-  "homepage": "https://github.com/dequelabs/axe-grunt-webdriver",
+  "homepage": "https://github.com/dequelabs/grunt-axe-webdriver",
   "author": {
-    "name": "David Sturley",
     "organization": "Deque Systems, Inc.",
     "url": "http://deque.com/"
   },
   "license": "MPL-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dequelabs/axe-grunt-webdriver.git"
+    "url": "git://github.com/dequelabs/grunt-axe-webdriver.git"
   },
   "bugs": {
-    "url": "https://github.com/dequelabs/axe-grunt-webdriver/issues"
+    "url": "https://github.com/dequelabs/grunt-axe-webdriver/issues"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -49,5 +48,13 @@
     "axe-webdriverjs": "~0.1.0",
     "promise": "^7.0.1",
     "selenium-webdriver": "^2.46.0"
-  }
+  },
+  "contributors": [
+    {
+      "name": "David Sturley"
+    },
+    {
+      "name": "Dylan Barrell"
+    }
+  ]
 }
