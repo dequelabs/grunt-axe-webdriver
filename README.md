@@ -52,6 +52,7 @@ Type: `Number`
 Default value: `0`
 
 A number that represents the maximum number of allowable violations. Each violation represents a rule that fails, it may fail for an number of nodes. It is recommended that this value not be changed.
+A negative value will prevent failure whatever the number of violations.
 
 #### browser
 Type: `String`
