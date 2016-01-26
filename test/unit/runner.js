@@ -4,11 +4,10 @@ var Promise = require('promise');
 
 describe('runner', function () {
 	var WebDriver = {};
-		WebDriver.Builder = function () {
-			return;
-		},
-		AxeBuilder = function () {
-		};
+	WebDriver.Builder = function () {
+	};
+	var AxeBuilder = function () {
+	};
 
 	WebDriver.Builder.prototype.quit = function () {
 		return this;
@@ -61,7 +60,7 @@ describe('runner', function () {
 			var repCall = reporter.getCall(0);
 			repCall.args[1][0]['url'].should.equal('one url');
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 	it('Should call grunt.file.write if dest is given', function (done) {
@@ -88,13 +87,13 @@ describe('runner', function () {
 		last = function () {
 			grunt.file.write.called.should.be.true();
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 	it('Should pass options.threshold to the reporter', function (done) {
 		var last,
 		that = {
-			options: function (opts) {
+			options: function () {
 				return {
 					browser: 'firefox',
 					server: null,
@@ -116,13 +115,13 @@ describe('runner', function () {
 			var repCall = reporter.getCall(0);
 			repCall.args[2].should.equal(2);
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 	it('Should pass options.browser to WebDriver.forBrowser', function (done) {
 		var last, browser,
 		that = {
-			options: function (opts) {
+			options: function () {
 				return {
 					browser: 'goofy',
 					server: null,
@@ -149,7 +148,7 @@ describe('runner', function () {
 			browser.should.equal('goofy');
 			WebDriver.Builder.prototype.forBrowser = original;
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 	it('Should call done with the result of the reporter', function (done) {
@@ -169,18 +168,18 @@ describe('runner', function () {
 		grunt = {},
 		reporter = function () {
 			return { one: 'my goofy result' };
-		}
+		};
 
 		last = function (result) {
 			result.one.should.equal('my goofy result');
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 	it('Should pass the analysis results to the reporter', function (done) {
 		var last, results,
 		that = {
-			options: function (opts) {
+			options: function () {
 				return {
 					browser: 'goofy',
 					server: null,
@@ -202,13 +201,13 @@ describe('runner', function () {
 		original = AxeBuilder.prototype.analyze;
 		AxeBuilder.prototype.analyze = function (cb) {
 			cb({ something: 'that I analyzed' });
-		}
+		};
 		last = function () {
 			results.length.should.equal(2); // two urls
 			results[0].something.should.equal('that I analyzed');
 			AxeBuilder.prototype.analyze = original;
 			done();
-		}
+		};
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 });
