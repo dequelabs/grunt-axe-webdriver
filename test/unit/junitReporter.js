@@ -4,12 +4,6 @@ var sinon = require('sinon');
 var parseString = require('xml2js').parseString;
 
 describe('junitReporter', function () {
-	beforeEach(function () {
-		this.sinon = sinon.sandbox.create();
-	});
-	afterEach(function () {
-		this.sinon.restore();
-	});
 	it('Should generate a Junit XML file from a JSON report', function () {
 		var results = [
 			{
