@@ -10,7 +10,7 @@ describe('junitReporter', function () {
 	afterEach(function () {
 		this.sinon.restore();
 	});
-	it('Should call junitReportBuilder.writeTo if junitDest is given', function () {
+	it('Should generate a Junit XML file from a JSON report', function () {
 		var results = [
 			{
 				url: 'http://test.com',
@@ -24,12 +24,20 @@ describe('junitReporter', function () {
 						nodes: [
 							{
 								target: 'div > div',
+								html: '<a href="#">My HTML element</a>',
 								any: [
 									{
 										message: 'First message'
 									},
 									{
-										message: 'Second message'
+										message: 'Second message',
+										relatedNodes: [
+											{
+												target: [
+													'body > .related > .node'
+												]
+											}
+										]
 									}
 								],
 								all: [],
@@ -80,8 +88,10 @@ describe('junitReporter', function () {
 			var failure = testcase1.failure[0];
 			failure.$.message.should.match(new RegExp(results[0].violations[0].help));
 			failure.$.message.should.match(new RegExp(results[0].violations[0].helpUrl));
+			failure._.should.match(new RegExp(results[0].violations[0].nodes[0].html));
 			failure._.should.match(new RegExp(results[0].violations[0].nodes[0].any[0].message));
 			failure._.should.match(new RegExp(results[0].violations[0].nodes[0].any[1].message));
+			failure._.should.match(new RegExp(results[0].violations[0].nodes[0].any[1].relatedNodes[0].target));
 
 			var testcase2 = testsuite.testcase[1];
 			testcase2.$.classname.should.equal(results[0].url + '.' + results[0].passes[0].id);
