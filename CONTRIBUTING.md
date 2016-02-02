@@ -74,3 +74,21 @@ function CheckResult(check) {
 	this.result = null;
 }
 ```
+
+## Setting up your environment
+
+In order to get going, fork and clone the repository. Then, if you do not have [Node.js](https://nodejs.org/download/) installed, install it!
+
+Once you have Node.js installed, from the repository root, do the following:
+
+```
+npm install
+```
+
+To run tests:
+
+```
+grunt
+```
+If you get a warning about a missing ChromeDriver, [download the latest release](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+and add the location to your PATH variable (or move it to a location already on your PATH).
