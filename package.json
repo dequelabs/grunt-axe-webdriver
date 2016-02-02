@@ -29,7 +29,8 @@
     "grunt-contrib-nodeunit": "^0.3.3",
     "grunt-mocha-cli": "^1.14.0",
     "should": "^7.0.2",
-    "sinon": "^1.15.4"
+    "sinon": "^1.15.4",
+    "xml2js": "^0.4.16"
   },
   "peerDependencies": {
     "grunt": "~0.4.5"
@@ -46,6 +47,7 @@
   ],
   "dependencies": {
     "axe-webdriverjs": "~0.2.0",
+    "junit-report-builder": "^1.1.1",
     "promise": "^7.0.1",
     "selenium-webdriver": "^2.46.0"
   },

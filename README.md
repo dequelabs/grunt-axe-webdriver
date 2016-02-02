@@ -30,7 +30,8 @@ grunt.initConfig({
       options: {
       }
       urls: [],
-      dest: "output.json"
+      dest: "output.json",
+      junitDest: "output.xml"
     },
   },
 });
@@ -51,6 +52,7 @@ Type: `Number`
 Default value: `0`
 
 A number that represents the maximum number of allowable violations. Each violation represents a rule that fails, it may fail for an number of nodes. It is recommended that this value not be changed.
+A negative value will prevent failure whatever the number of violations.
 
 #### browser
 Type: `String`
@@ -69,6 +71,12 @@ Type: `String`
 Default value: undefined
 
 An optional file to which the results of the accessibility scans will be written as a JSON Array of results objects.
+
+### junitDest
+Type: `String`
+Default value: undefined
+
+An optional file to which the results of the accessibility scans will be written as a Junit XML file.
 
 ### Usage Examples
 

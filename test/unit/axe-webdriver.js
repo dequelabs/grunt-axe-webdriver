@@ -18,14 +18,4 @@ describe('axe-webdriver grunt task', function () {
 		call.args[0].should.equal('axe-webdriver');
 		(typeof call.args[2]).should.equal('function');
 	});
-	it('should register an axe-webdriver task with callback function', function () {
-		var grunt = {
-			registerMultiTask: sinon.stub()
-		};
-		task(grunt);
-		grunt.registerMultiTask.called.should.be.true();
-		var call = grunt.registerMultiTask.getCall(0);
-		call.args[0].should.equal('axe-webdriver');
-		(typeof call.args[2]).should.equal('function');
-	});
 });
