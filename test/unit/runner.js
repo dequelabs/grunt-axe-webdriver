@@ -28,6 +28,9 @@ describe('runner', function () {
 	AxeBuilder.prototype.analyze = function (cb) {
 		cb({});
 	};
+	AxeBuilder.prototype.withTags = function (tags) {
+		return this;
+	};
 
 	beforeEach(function() {
 	  this.sinon = sinon.sandbox.create();
@@ -208,6 +211,73 @@ describe('runner', function () {
 			AxeBuilder.prototype.analyze = original;
 			done();
 		};
+		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
+	});
+	it('Should pass single options.tags as a string to AxeBuilder.withTags', function (done) {
+		var last, tags,
+			that = {
+				options: function () {
+					return {
+						tags: 'TagToCheck'
+					};
+				},
+				async: function () {
+					return last
+				},
+				data : {
+					dest: undefined,
+					urls: ['one url']
+				}
+			},
+			grunt = {},
+			reporter = function () {},
+			original = AxeBuilder.prototype.withTags;
+
+		AxeBuilder.prototype.withTags = function (_tags) {
+			tags = _tags;
+			return this;
+		};
+
+		last = function () {
+			tags.should.equal('TagToCheck');
+			AxeBuilder.prototype.withTags = original;
+			done();
+		};
+
+		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
+	});
+	it('Should pass multiple options.tags as an array of strings to AxeBuilder.withTags', function (done) {
+		var last, tags,
+			that = {
+				options: function () {
+					return {
+						tags: ['FirstTagToCheck', 'SecondTagToCheck']
+					};
+				},
+				async: function () {
+					return last
+				},
+				data : {
+					dest: undefined,
+					urls: ['one url']
+				}
+			},
+			grunt = {},
+			reporter = function () {},
+			original = AxeBuilder.prototype.withTags;
+
+		AxeBuilder.prototype.withTags = function (_tags) {
+			tags = _tags;
+			return this;
+		};
+
+		last = function () {
+			tags[0].should.equal('FirstTagToCheck');
+			tags[1].should.equal('SecondTagToCheck');
+			AxeBuilder.prototype.withTags = original;
+			done();
+		};
+
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
 });

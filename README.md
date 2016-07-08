@@ -43,7 +43,8 @@ Default value:
 ```
 {
   browser: 'firefox',
-  threshold: 0
+  threshold: 0,
+  tags: null
 }
 ```
 
@@ -59,6 +60,12 @@ Type: `String`
 Default value: `firefox`
 
 Which browser to run the tests in
+
+#### tags
+Type: `String` or `Array[String]`
+Default value: `null`
+
+Which tags to filter violations on
 
 ### urls
 Type: `Array[String]`
@@ -111,6 +118,37 @@ grunt.initConfig({
       urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html'],
     }
   },
+});
+```
+
+#### Tag filtering
+##### Single
+In this example, the only violations that will be checked for are those that have the matching tag.
+```js
+grunt.initConfig({
+  "axe-webdriver": {
+    firefox: {
+      options: {
+        tags: 'wcag2a'
+      },
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html']
+    }
+  }
+});
+```
+
+##### Multiple
+In this example, the only violations that will be checked for are those that have one of the matching tags.
+```js
+grunt.initConfig({
+  "axe-webdriver": {
+    firefox: {
+      options: {
+        tags: ['wcag2a', 'wcag2aa']
+      },
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html']
+    }
+  }
 });
 ```
 
