@@ -280,4 +280,44 @@ describe('runner', function () {
 
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	});
+	it('Should not call AxeBuilder.withTags when options.tags is an empty string', function (done) {
+		CheckWithTagsIsNotCalled(done, '');
+	});
+	it('Should not call AxeBuilder.withTags when options.tags is null', function (done) {
+		CheckWithTagsIsNotCalled(done, null);
+	});
+	it('Should not call AxeBuilder.withTags when options.tags is an empty array', function (done) {
+		CheckWithTagsIsNotCalled(done, []);
+	});
+	
+	function CheckWithTagsIsNotCalled(done, tags) {
+		var last,
+			that = {
+				options: function () {
+					return {
+						tags: tags
+					};
+				},
+				async: function () {
+					return last
+				},
+				data : {
+					dest: undefined,
+					urls: ['one url']
+				}
+			},
+			grunt = {},
+			reporter = function () {},
+			original = AxeBuilder.prototype.withTags;
+
+		AxeBuilder.prototype.withTags = sinon.stub();
+
+		last = function () {
+			AxeBuilder.prototype.withTags.called.should.be.false();
+			AxeBuilder.prototype.withTags = original;
+			done();
+		};
+
+		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
+	}
 });
