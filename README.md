@@ -61,10 +61,18 @@ Default value: `firefox`
 Which browser to run the tests in
 
 ### urls
-Type: `Array[String]`
+Type: `Array[String]|callback`
 Default value: `[]`
 
 An Array of URLs that will be tested. The default value is an empty array, you must supply at least one URL in order to successfully complete this task.
+
+Can also be a callback function that returns an array of URLs.
+
+### server
+Type: `String`
+Default value: `null`
+
+Address of the selenium server to run the tests against. Defaults to a direct connection to the local browser.
 
 ### dest
 Type: `String`
