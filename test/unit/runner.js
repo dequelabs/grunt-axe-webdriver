@@ -15,6 +15,9 @@ describe('runner', function () {
 	WebDriver.Builder.prototype.forBrowser = function () {
 		return this;
 	};
+	WebDriver.Builder.prototype.usingServer = function () {
+		return this;
+	};
 	WebDriver.Builder.prototype.build = function () {
 		return this;
 	};
