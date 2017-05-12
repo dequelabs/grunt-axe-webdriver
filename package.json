@@ -46,7 +46,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "axe-webdriverjs": "~0.2.0",
+    "axe-webdriverjs": "^1.1.0",
     "chromedriver": "^2.23.0",
     "junit-report-builder": "^1.1.1",
     "promise": "^7.0.1",
