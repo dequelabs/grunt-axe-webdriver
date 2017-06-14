@@ -1,7 +1,7 @@
 {
   "name": "grunt-axe-webdriver",
   "description": "Grunt plugin for aXe utilizing WebDriverJS",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "homepage": "https://github.com/dequelabs/grunt-axe-webdriver",
   "author": {
     "organization": "Deque Systems, Inc.",
@@ -46,7 +46,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "axe-webdriverjs": "^1.1.0",
+    "axe-webdriverjs": "^1.1.2",
     "chromedriver": "^2.23.0",
     "junit-report-builder": "^1.1.1",
     "promise": "^7.0.1",
@@ -58,6 +58,9 @@
     },
     {
       "name": "Dylan Barrell"
+    },
+    {
+      "name": "Marcy Sutton"
     }
   ]
 }
