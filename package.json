@@ -19,7 +19,9 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -50,7 +52,8 @@
     "chromedriver": "^2.23.0",
     "junit-report-builder": "^1.1.1",
     "promise": "^7.0.1",
-    "selenium-webdriver": "^2.46.0"
+    "selenium-webdriver": "^2.46.0",
+    "snyk": "^1.41.1"
   },
   "contributors": [
     {
@@ -62,5 +65,6 @@
     {
       "name": "Marcy Sutton"
     }
-  ]
+  ],
+  "snyk": true
 }
