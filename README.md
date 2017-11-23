@@ -45,6 +45,7 @@ Default value:
 ```
 {
   browser: 'firefox',
+  browserArguments: '',
   threshold: 0,
   tags: null
 }
@@ -62,6 +63,12 @@ Type: `String`
 Default value: `firefox`
 
 Which browser to run the tests in
+
+#### browserArguments
+Type: `String` or `Array` of `Strings`
+Default value: `''`
+
+This can be used to pass command line arguments when starting the browser. For example if you want to start the browser headless you can set this to `'--headless'` for Firefox or `['headless', 'disable-gpu']` for Chrome.
 
 #### tags
 Type: `String` or `Array[String]`
@@ -124,6 +131,30 @@ grunt.initConfig({
     chrome: {
       options: {
         browser: "chrome"
+      },
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html'],
+    }
+  },
+});
+```
+
+#### Starting Firefox and Chrome in headless mode
+In this example, we add some `browserArguments` to start Firefox and Chrome in headless mode. The selinium `addArguments` API has a slightly different syntax for the `firefoxDriver` and `chromeDriver`, hence it looks a bit different for each browser:
+
+```js
+grunt.initConfig({
+  "axe-webdriver": {
+    firefox: {
+      options: {
+        browser: 'firefox',
+        browserArguments: ['--headless']
+	  },
+      urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html']
+    },
+    chrome: {
+      options: {
+        browser: 'chrome',
+        browserArguments: ['headless', 'disable-gpu']
       },
       urls: ['http://localhost:9876/tests/test1.html', 'http://localhost:9876/tests/test2.html'],
     }
