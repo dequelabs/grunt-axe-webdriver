@@ -9,22 +9,21 @@ describe('runner', function () {
 	var AxeBuilder = function () {
 	};
 
-	WebDriver.Builder.prototype.quit = function () {
+	function returnSelf () {
 		return this;
-	};
-	WebDriver.Builder.prototype.forBrowser = function () {
-		return this;
-	};
-	WebDriver.Builder.prototype.usingServer = function () {
-		return this;
-	};
-	WebDriver.Builder.prototype.build = function () {
-		return this;
-	};
-	WebDriver.Builder.prototype.get = function () {
-		return this;
-	};
-	WebDriver.Builder.prototype.then = function (cb) {
+	}
+
+	var builder = WebDriver.Builder.prototype
+
+	builder.quit = returnSelf;
+	builder.forBrowser = returnSelf;
+	builder.setChromeOptions = returnSelf;
+	builder.setFirefoxOptions = returnSelf;
+	builder.usingServer = returnSelf;
+	builder.build = returnSelf;
+	builder.get = returnSelf;
+
+	builder.then = function (cb) {
 		cb();
 		return this;
 	};
