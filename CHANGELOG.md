@@ -1,3 +1,11 @@
+<a name="1.0.1"></a>
+## [1.0.1](https://github.com/dequelabs/grunt-axe-webdriver/compare/v1.0.0...v1.0.1) (2017-12-20)
+
+
+### Features
+
+* Update to [axe-core 2.6.0](https://github.com/dequelabs/axe-core/releases/tag/v2.6.0)
+
 <a name="1.0.0"></a>
 # 1.0.0 (2017-12-06)
 
