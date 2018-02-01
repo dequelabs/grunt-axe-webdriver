@@ -33,6 +33,7 @@ grunt.initConfig({
       }
       urls: [],
       dest: "output.json",
+      htmlDest: "output.html",
       junitDest: "output.xml"
     },
   },
@@ -95,6 +96,12 @@ Type: `String`
 Default value: undefined
 
 An optional file to which the results of the accessibility scans will be written as a JSON Array of results objects.
+
+### htmlDest
+Type: `String`
+Default value: undefined
+
+An optional file to which the results of the accessibility scans will be written as an HTML file.
 
 ### junitDest
 Type: `String`
