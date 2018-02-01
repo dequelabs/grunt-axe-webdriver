@@ -1,3 +1,13 @@
+<a name="1.1.0"></a>
+# [1.1.0](https://github.com/dequelabs/grunt-axe-webdriver/compare/v1.0.1...v1.1.0) (2018-02-01)
+
+
+### Features
+
+* Added `htmlDest` option using an htmlReporter ([#33](https://github.com/dequelabs/grunt-axe-webdriver/issues/33)) ([ac65779](https://github.com/dequelabs/grunt-axe-webdriver/commit/ac65779))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/dequelabs/grunt-axe-webdriver/compare/v1.0.0...v1.0.1) (2017-12-20)
 
