@@ -1,3 +1,18 @@
+<a name="2.0.0-alpha.0"></a>
+# [2.0.0-alpha.0](https://github.com/dequelabs/grunt-axe-webdriver/compare/v1.1.0...v2.0.0-alpha.0) (2018-02-19)
+
+
+### Bug Fixes
+
+* Chrome running with invalid arguments ([25c1599](https://github.com/dequelabs/grunt-axe-webdriver/commit/25c1599))
+
+
+### Features
+
+* Add shadow DOM support for Chrome ([e200a92](https://github.com/dequelabs/grunt-axe-webdriver/commit/e200a92))
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/dequelabs/grunt-axe-webdriver/compare/v1.0.1...v1.1.0) (2018-02-01)
 
