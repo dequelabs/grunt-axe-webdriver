@@ -3,11 +3,13 @@ jobs:
   build:
     docker:
       - image: circleci/node:6.12.3-browsers
+    working_directory: ~/grunt-axe-webdriver
     steps:
       - checkout
-      - run:
-          name: install-npm
-          command: npm install
+      - restore_cache:
+          keys:
+            - npm-deps-{{ checksum "package.json" }}
+      - run: npm install
       # This makes sure Chrome is always up to date in your test suite
       # On average this adds about 10 seconds to your build suite
       # Requires Ubuntu 14.04 (Trusty) in the CircleCI's OS setting (Settings > Build Environment)
@@ -22,6 +24,10 @@ jobs:
       - run:
           name: install-grunt-cli
           command: npm install grunt-cli
+      - save_cache:
+          key: npm-deps-{{ checksum "package.json" }}
+          paths:
+            - node_modules
       - run:
           name: test
           command: npm test
