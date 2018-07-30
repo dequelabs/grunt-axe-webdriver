@@ -22,6 +22,7 @@ describe('runner', function () {
 	builder.usingServer = returnSelf;
 	builder.build = returnSelf;
 	builder.get = returnSelf;
+	builder.manage = returnSelf;
 
 	builder.then = function (cb) {
 		cb();
@@ -322,4 +323,80 @@ describe('runner', function () {
 
 		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
 	}
+	it('Should pass a configurable number to time out Webdriver', function (done) {
+		original = WebDriver.Builder.prototype.manage;
+
+		var that = {
+			options: function (opts) {
+				opts.scriptTimeout = 1000;
+				return opts;
+			},
+			async: function () {
+				return last
+			},
+			data : {
+				dest: undefined,
+				urls: ['one url']
+			}
+		},
+		grunt = {},
+		reporter = sinon.stub();
+
+		var scriptTimeout;
+		builder.manage = function() {
+			return {
+				timeouts: function() {
+					return {
+						setScriptTimeout: function(value) {
+							scriptTimeout = value;
+						}
+					}
+				}
+			}
+		};
+		last = function () {
+			WebDriver.Builder.prototype.manage = original;
+			scriptTimeout.should.equal(1000);
+			done();
+		};
+		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
+	});
+	it('Should not call Webdriver setScriptTimeout if no number is provided' , function (done) {
+		original = WebDriver.Builder.prototype.manage;
+
+		var that = {
+			options: function (opts) {
+				return opts;
+			},
+			async: function () {
+				return last
+			},
+			data : {
+				dest: undefined,
+				urls: ['one url']
+			}
+		},
+		grunt = {},
+		reporter = sinon.stub();
+
+		var setScriptTimeoutCalled = false;
+
+		builder.manage = function() {
+			return {
+				timeouts: function() {
+					return {
+						setScriptTimeout: function(value) {
+							setScriptTimeoutCalled = true;
+						}
+					}
+				}
+			}
+		};
+		last = function () {
+			WebDriver.Builder.prototype.manage = original;
+			setScriptTimeoutCalled.should.equal(false);
+			done();
+		};
+		runner.call(that, grunt, WebDriver, Promise, AxeBuilder, reporter);
+	});
 });
