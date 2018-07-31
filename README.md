@@ -48,7 +48,8 @@ Default value:
   browser: 'firefox',
   browserArguments: '',
   threshold: 0,
-  tags: null
+  tags: null,
+  scriptTimeout: 60000
 }
 ```
 
@@ -76,6 +77,12 @@ Type: `String` or `Array[String]`
 Default value: `null`
 
 Which tags to filter violations on
+
+#### scriptTimeout
+Type: `Number`
+Default value: `null`
+
+Number of milliseconds for WebDriver to wait before timing out an injected script
 
 ### urls
 Type: `Array[String]|callback`
