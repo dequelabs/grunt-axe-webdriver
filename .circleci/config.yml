@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   docker:
     - image: circleci/node:6.12.3-browsers
-  working_directory: ~/axe-core
+  working_directory: ~/grunt-axe-webdriver
 
 restore_dependency_cache: &restore_dependency_cache
   restore_cache:
