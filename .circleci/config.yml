@@ -5,12 +5,6 @@ defaults: &defaults
     - image: circleci/node:6.12.3-browsers
   working_directory: ~/grunt-axe-webdriver
 
-restore_dependency_cache: &restore_dependency_cache
-  restore_cache:
-    keys:
-      - v1-npm-cache-{{ checksum "package.json" }}
-      - v1-npm-cache-
-
 configure_npm: &configure_npm
   run: npm config set "//registry.npmjs.org/:_authToken" $NPM_AUTH
 
@@ -20,11 +14,11 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v2-npm-deps-{{ checksum "package-lock.json" }}
       - <<: *configure_npm
       - run: npm install
       - save_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v2-npm-deps-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
   tests:
@@ -32,7 +26,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: v1-npm-deps-{{ checksum "package-lock.json" }}
+          key: v2-npm-deps-{{ checksum "package-lock.json" }}
       # This makes sure Chrome is always up to date in your test suite
       # On average this adds about 10 seconds to your build suite
       # Requires Ubuntu 14.04 (Trusty) in the CircleCI's OS setting (Settings > Build Environment)
