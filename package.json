@@ -48,7 +48,7 @@
   ],
   "dependencies": {
     "axe-webdriverjs": "^2.0.0-alpha.1",
-    "chromedriver": "^2.23.0",
+    "chromedriver": "^2.33.2",
     "geckodriver": "^1.10.0",
     "junit-report-builder": "^1.1.1",
     "promise": "^7.0.1",
