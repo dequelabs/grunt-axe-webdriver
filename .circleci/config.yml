@@ -47,6 +47,18 @@ jobs:
       - checkout
       - <<: *configure_npm
       - run: npm publish
+  github_release:
+    docker:
+      - image: circleci/golang:1.8
+    steps:
+      - checkout
+      - run: go get gopkg.in/aktau/github-release.v0
+      - run:
+          name: Download and run GitHub release script
+          command: |
+            curl https://raw.githubusercontent.com/dequelabs/attest-release-scripts/develop/src/node-github-release.sh -s -o ./node-github-release.sh
+            chmod +x ./node-github-release.sh
+            ./node-github-release.sh
 
 workflows:
   version: 2
@@ -63,3 +75,6 @@ workflows:
           filters:
             branches:
               only: master
+      - github_release:
+          requires:
+            - release
