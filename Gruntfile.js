@@ -53,7 +53,7 @@ module.exports = function(grunt) {
 		mochacli: {
 			options: {
 				require: ['should'],
-				reporter: 'nyan',
+				reporter: 'spec',
 				bail: true
 			},
 			all: ['test/**/*.js']
